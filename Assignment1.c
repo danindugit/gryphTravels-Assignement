@@ -17,7 +17,7 @@
     printf("Would you like to enter a time in 12-hour format (enter 1) or 24-hour format (enter 2)?");
     scanf("%d", &format);   
 
-    //prompt for time based on format
+    //prompt for time based on format choice
     if(format == 1){
          printf("Enter time in 12-hour format\n");
     }
