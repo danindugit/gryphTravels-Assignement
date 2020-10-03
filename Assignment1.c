@@ -34,6 +34,7 @@ Task 1: Get input from user of either 24 hour format or 12 hour format. Then dis
         }
         printf("\n\n---------------------------\n");
         printf("You entered %d%d:%d%d $s\n", (hour/10), (hour%10), (min/10), (min%10), meridian);
+        //adjust 24 hour time output based on meridian
         if(meridian[0] == 'a'){
             printf("In 24 hour format, - you entered %d%d:%d%d\n", (hour/10), (hour%10), (min/10), (min%10));
         }
@@ -48,6 +49,17 @@ Task 1: Get input from user of either 24 hour format or 12 hour format. Then dis
         scanf("%d", &hour);
         printf("Enter a value between 0 and 60 for minutes: ");
         scanf("%d", &min);
+        //check if inputted hour was greater than 12 to determine meridian
+        if(hour >= 12){
+            strcpy(meridian, "pm");
+        }
+        else{
+            strcpy(meridian, "am");
+        }
+        printf("\n\n---------------------------\n");
+        printf("You entered %d%d:%d%d\n", (hour/10), (hour%10), (min/10), (min%10));
+        printf("In 12 hour format, - you entered %d%d:%d%d %s", (hour/10), (hour%10), (min/10), (min%10), meridian);
+        printf("---------------------------\n");
     }
 
     return 0;
