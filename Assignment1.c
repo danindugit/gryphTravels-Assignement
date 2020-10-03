@@ -1,12 +1,11 @@
 #include <stdio.h>
 
-/*
- * Name: Assignment.c
- * Author: Danindu Marasinghe
- * Function: 
- *  Task 1: Get input from user of either 24 hour format or 12 hour format. Then display an inputted time 
- *          in both formats.
- */
+/**********************
+CIS 1300
+D. M.
+Oct 7/20
+Task 1: Get input from user of either 24 hour format or 12 hour format. Then display an inputted time in both formats.
+************************/
  
  int main(){
     int hours, min, format;
