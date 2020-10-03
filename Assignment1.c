@@ -44,6 +44,10 @@ Task 1: Get input from user of either 24 hour format or 12 hour format. Then dis
     }
     else if(format == 2){
         printf("Enter time in 24-hour format\n");
+        printf("Enter a value between 0 and 24 for hour: ");
+        scanf("%d", &hour);
+        printf("Enter a value between 0 and 60 for minutes: ");
+        scanf("%d", &min);
     }
 
     return 0;
