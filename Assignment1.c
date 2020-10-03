@@ -10,7 +10,7 @@ Task 1: Get input from user of either 24 hour format or 12 hour format. Then dis
  
  int main(){
     int hour, min, format;
-    char meridian[2];
+    char meridian[3];
 
     //task 1
     //prompt for format until valid entry
