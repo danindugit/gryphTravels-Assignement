@@ -30,17 +30,19 @@ D. M.
 Oct 7/20
 Task 1: Get input from user of either 24 hour format or 12 hour format. Then display an inputted time in both formats.
 Task 2: Based on the time entered by the customer, the closest departure time is displayed using 12-hour format.
+Task 3: Ask user if they want a hotel, and if so, give them the choices for a hotel and ask how long the stay is.
 ************************/
 #include <stdio.h>  //used for printf and scanf
 #include <string.h>
  
  int main(){
-    int hour, min, format;
+    int hour, min, format, isHotel, hotelChoice, daysInHotel;
     char meridian[3];
-    double flightCost;
+    double flightCost, hotelCost;
 
     //initialize variables
     flightCost = 0;
+    hotelCost = 0;
 
     //task 1
     //prompt for format until valid entry
@@ -133,6 +135,32 @@ Task 2: Based on the time entered by the customer, the closest departure time is
     else if((hour < 17) || (hour == 17 && min <= 15)){
         printf("Closest departure times is 5:15 p.m., arriving at 6:25 p.m.\n");
         flightCost = 226;
+    }
+
+    //task 3
+    printf("Would you like a hotel in Montreal - enter 0 for no; 1 for yes? ");
+    scanf("%d", &isHotel);
+    //if they want a hotel, display hotel choices and get their choices
+    if(isHotel==1){
+        printf("\n\nThere are 3 hotels:\n1. Marriott: $248\n2. Sheraton: $90\n3. Double Tree: $128\n\n");
+        printf("Your choice:");
+        scanf("%s", &hotelChoice);
+        //ask how many days the user wants to stay
+        printf("How many days in Montreal?");
+        scanf("%d", &daysInHotel);
+        //calculate hotel cost based on choice of hotel and days in montreal
+        if(hotelChoice == 1){
+            //marriott hotel
+            hotelCost = 248 * daysInHotel;
+        }
+        else if(hotelChoice == 2){
+            //sheraton hotel
+            hotelCost = 90 * daysInHotel;
+        }
+        else if(hotelChoice == 3){
+            //double tree hotel
+            hotelCost = 128 * daysInHotel;
+        }
     }
 
     return 0;
