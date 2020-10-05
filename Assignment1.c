@@ -86,12 +86,18 @@ Task 2: Based on the time entered by the customer, the closest departure time is
         //check if inputted hour was greater than 12 to determine meridian and convert to 12 hour
         if(hour >= 12){
             strcpy(meridian, "pm");
+            hour -= 12;
         }
         else{
             strcpy(meridian, "am");
         }
         printf("In 12 hour format, - you entered %d%d:%d%d %s\n", (hour/10), (hour%10), (min/10), (min%10), meridian);
         printf("---------------------------\n");
+
+        //if changed for pm, change back to 24 hour format
+        if(meridian[0] == 'p'){
+            hour += 12;
+        }
     }
     //task 2
     //if given time is before 7:15am or after 5:15pm
@@ -113,13 +119,21 @@ Task 2: Based on the time entered by the customer, the closest departure time is
         flightCost = 283;
     }
     else if((hour < 11) || (hour == 11 && min <= 15)){
-        printf("Closest departure times is 11:15 a.m., arriving at 12:25 a.m.\n");
+        printf("Closest departure times is 11:15 a.m., arriving at 12:25 p.m.\n");
+        flightCost = 283;
+    }
+    else if((hour < 15) || (hour == 15 && min <= 15)){
+        printf("Closest departure times is 3:15 p.m., arriving at 4:25 p.m.\n");
         flightCost = 226;
     }
-    // else if((hour < 8) || (hour == 8 && min <= 15)){
-    //     printf("Closest departure times is 8:15 a.m., arriving at 9:25 a.m.\n");
-    //     flightCost = 226;
-    // }
+    else if((hour < 16) || (hour == 16 && min <= 15)){
+        printf("Closest departure times is 4:15 p.m., arriving at 5:25 p.m.\n");
+        flightCost = 226;
+    }
+    else if((hour < 17) || (hour == 17 && min <= 15)){
+        printf("Closest departure times is 5:15 p.m., arriving at 6:25 p.m.\n");
+        flightCost = 226;
+    }
 
     return 0;
  }
