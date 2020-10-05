@@ -31,18 +31,20 @@ Oct 7/20
 Task 1: Get input from user of either 24 hour format or 12 hour format. Then display an inputted time in both formats.
 Task 2: Based on the time entered by the customer, the closest departure time is displayed using 12-hour format.
 Task 3: Ask user if they want a hotel, and if so, give them the choices for a hotel and ask how long the stay is.
+Task 4: Ask if user wants a ride to the hotel (if they're staying in one)
 ************************/
 #include <stdio.h>  //used for printf and scanf
 #include <string.h>
  
  int main(){
-    int hour, min, format, isHotel, hotelChoice, daysInHotel;
+    int hour, min, format, isHotel, hotelChoice, daysInHotel, rideChoice;
     char meridian[3];
-    double flightCost, hotelCost;
+    double flightCost, hotelCost, rideCost;
 
     //initialize variables
     flightCost = 0;
     hotelCost = 0;
+    rideCost = 0;
 
     //task 1
     //prompt for format until valid entry
@@ -144,7 +146,7 @@ Task 3: Ask user if they want a hotel, and if so, give them the choices for a ho
     if(isHotel==1){
         printf("\n\nThere are 3 hotels:\n1. Marriott: $248\n2. Sheraton: $90\n3. Double Tree: $128\n\n");
         printf("Your choice:");
-        scanf("%s", &hotelChoice);
+        scanf("%d", &hotelChoice);
         //ask how many days the user wants to stay
         printf("How many days in Montreal?");
         scanf("%d", &daysInHotel);
@@ -161,7 +163,32 @@ Task 3: Ask user if they want a hotel, and if so, give them the choices for a ho
             //Double tree hotel
             hotelCost = 128 * daysInHotel;
         }
+        //task 4
+        //ask if user wants a ride to hotel
+        printf("Would you like a ride from airport to hotel? - enter 0 for no; 1 for yes ");
+        scanf("%d", &rideChoice);
+        //if user wants a ride, calculate ride cost
+        if(rideChoice == 1){
+            //calculate ride cost based on choice of hotel
+            switch (hotelChoice)
+            {
+            case 1: //mariott
+                rideCost = 0;
+                break;
+            case 2: //sheraton
+                rideCost = 25;
+                break;
+            case 3: //sheraton
+                rideCost = 20;
+                break;            
+            default: //invalid value
+                break;
+            }
+        }
     }
+
+    //test output
+    printf("Hotel Choice: %d\nHotel cost: %.2lf\nRide cost: %.2lf", hotelChoice, hotelCost, rideCost);
 
     return 0;
  }
