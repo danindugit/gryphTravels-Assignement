@@ -158,7 +158,7 @@ Task 3: Ask user if they want a hotel, and if so, give them the choices for a ho
             hotelCost = 90 * daysInHotel;
         }
         else if(hotelChoice == 3){
-            //double tree hotel
+            //Double tree hotel
             hotelCost = 128 * daysInHotel;
         }
     }
