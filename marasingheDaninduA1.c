@@ -32,19 +32,22 @@ Task 1: Get input from user of either 24 hour format or 12 hour format. Then dis
 Task 2: Based on the time entered by the customer, the closest departure time is displayed using 12-hour format.
 Task 3: Ask user if they want a hotel, and if so, give them the choices for a hotel and ask how long the stay is.
 Task 4: Ask if user wants a ride to the hotel (if they're staying in one)
+Task 5: Calculate and display total cost before discounts and taxes
 ************************/
 #include <stdio.h>  //used for printf and scanf
 #include <string.h>
  
  int main(){
-    int hour, min, format, isHotel, hotelChoice, daysInHotel, rideChoice;
+    int hour, min, format, isHotel, hotelChoice, daysInHotel, rideChoice, dayOfBirth;
     char meridian[3];
-    double flightCost, hotelCost, rideCost;
+    double flightCost, hotelCost, rideCost, totalCost;
 
     //initialize variables
+    daysInHotel = 0;
     flightCost = 0;
     hotelCost = 0;
     rideCost = 0;
+    totalCost = 0;
 
     //task 1
     //prompt for format until valid entry
@@ -136,7 +139,7 @@ Task 4: Ask if user wants a ride to the hotel (if they're staying in one)
     }
     else if((hour < 17) || (hour == 17 && min <= 15)){
         printf("Closest departure times is 5:15 p.m., arriving at 6:25 p.m.\n");
-        flightCost = 226;
+        flightCost = 401;
     }
 
     //task 3
@@ -187,8 +190,15 @@ Task 4: Ask if user wants a ride to the hotel (if they're staying in one)
         }
     }
 
-    //test output
-    printf("Hotel Choice: %d\nHotel cost: %.2lf\nRide cost: %.2lf", hotelChoice, hotelCost, rideCost);
+    //prompt for user DOB for task 6 discount 2
+    printf("\nNow enter your day of birth to qualify for discount2: ");
+    scanf("%d", dayOfBirth);
+
+    //task 5
+    //display individual costs
+    printf("\nYour total cost comes to:\n\nCost of closest departure flight: $ %.2lf\nCost of Hotel for %d days: $ %.2lf\nCost of ride: $ %.2lf\n\n", flightCost, daysInHotel, hotelCost, rideCost);
+    totalCost = flightCost + hotelCost + rideCost;  //calculate total cost before discounts and taxes
+    printf("Total cost before tax: $ %.2lf", totalCost);
 
     return 0;
  }
