@@ -41,6 +41,7 @@ E1: Loop billing 3 times and give user cheapest price option
 #include <string.h>
  
  int main(){
+    //declaring variables
     int hour, min, format, isHotel, hotelChoice, daysInHotel, rideChoice, dayOfBirth, sumBirthDigits;
     char meridian[3];
     double flightCost, hotelCost, rideCost, totalCost, option1Cost, option2Cost, option3Cost;
@@ -150,31 +151,31 @@ E1: Loop billing 3 times and give user cheapest price option
             printf("Closest departure times is 7:15 a.m., arriving at 8:25 a.m.\n");
             flightCost = 231;
         }
-        else if((hour < 8) || (hour == 8 && min <= 44)){
+        else if((hour < 8) || (hour == 8 && min <= 44)){ //before 0845
             printf("Closest departure times is 8:15 a.m., arriving at 9:25 a.m.\n");
             flightCost = 226;
         }
-        else if((hour < 9) || (hour == 9 && min <= 44)){
+        else if((hour < 9) || (hour == 9 && min <= 44)){ //before 0945
             printf("Closest departure times is 9:15 a.m., arriving at 10:25 a.m.\n");
             flightCost = 226;
         }
-        else if((hour < 10) || (hour == 10 && min <= 44)){
+        else if((hour < 10) || (hour == 10 && min <= 44)){ //before 1045
             printf("Closest departure times is 10:15 a.m., arriving at 11:25 a.m.\n");
             flightCost = 283;
         }
-        else if((hour < 13) || (hour == 13 && min <= 14)){
+        else if((hour < 13) || (hour == 13 && min <= 14)){ //before 1315
             printf("Closest departure times is 11:15 a.m., arriving at 12:25 p.m.\n");
             flightCost = 283;
         }
-        else if((hour < 15) || (hour == 15 && min <= 44)){
+        else if((hour < 15) || (hour == 15 && min <= 44)){ //before 1545
             printf("Closest departure times is 3:15 p.m., arriving at 4:25 p.m.\n");
             flightCost = 226;
         }
-        else if((hour < 16) || (hour == 16 && min <= 44)){
+        else if((hour < 16) || (hour == 16 && min <= 44)){ //before 1645
             printf("Closest departure times is 4:15 p.m., arriving at 5:25 p.m.\n");
             flightCost = 226;
         }
-        else if((hour < 23) || (hour == 23 && min <= 59)){
+        else if((hour < 23) || (hour == 23 && min <= 59)){ //before 0000
             printf("Closest departure times is 5:15 p.m., arriving at 6:25 p.m.\n");
             flightCost = 401;
         }
@@ -226,7 +227,7 @@ E1: Loop billing 3 times and give user cheapest price option
 
                 default: //invalid value
                     break;
-                    
+
                 }
             }
         }
