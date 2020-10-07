@@ -215,14 +215,18 @@ E1: Loop billing 3 times and give user cheapest price option
                 case 1: //mariott
                     rideCost = 0;
                     break;
+
                 case 2: //sheraton
                     rideCost = 25;
                     break;
+
                 case 3: //sheraton
                     rideCost = 20;
-                    break;            
+                    break;  
+
                 default: //invalid value
                     break;
+                    
                 }
             }
         }
