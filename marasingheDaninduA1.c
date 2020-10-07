@@ -42,7 +42,7 @@ Task 7: Display net cost
  int main(){
     int hour, min, format, isHotel, hotelChoice, daysInHotel, rideChoice, dayOfBirth, sumBirthDigits;
     char meridian[3];
-    double flightCost, hotelCost, rideCost, totalCost;
+    double flightCost, hotelCost, rideCost, totalCost, option1Cost, option2Cost, option3Cost;
 
     //initialize variables
     daysInHotel = 0;
@@ -51,15 +51,22 @@ Task 7: Display net cost
     rideCost = 0;
     totalCost = 0;
     sumBirthDigits = 0;
+    option1Cost = 0;
+    option2Cost = 0;
+    option3Cost = 0;
 
+    //loop through billing process 3 times for each option
+    for (int i = 0; i < 3; i++){
+    //notify user that this billing process wil repeat 3 times
+    printf("This will run for 3 transactions\n\n");
     //task 1
     //prompt for format until valid entry
-    printf("Would you like to enter a time in 12-hour format (enter 1) or 24-hour format (enter 2)?");
+    printf("Would you like to enter a time in 12-hour format (enter 1) or 24-hour format (enter 2)? ");
     scanf("%d", &format);   
 
     //prompt for time based on format choice
     if(format == 1){
-        printf("Enter time in 12-hour format\n\n");
+        printf("\nEnter time in 12-hour format\n\n");
         printf("Enter a value between 0 and 12 for hour: ");
         scanf("%d", &hour);
         printf("Enter a value between 0 and 60 for minutes: ");
@@ -73,14 +80,21 @@ Task 7: Display net cost
         else if(meridian[0] == 'p'){
             strcpy(meridian, "pm");
         }
-        printf("\n---------------------------\n");
+        printf("---------------------------\n");
         printf("You entered %d%d:%d%d %s\n", (hour/10), (hour%10), (min/10), (min%10), meridian);
         //adjust 24 hour time output based on meridian
         if(meridian[0] == 'a'){
+            if(hour == 12){
+                //if 12am, set hour to 0
+                hour = 0;
+            }
             printf("In 24 hour format, - you entered %d%d:%d%d\n", (hour/10), (hour%10), (min/10), (min%10));
         }
         else if(meridian[0] == 'p'){
-            hour +=12;
+            //add 12 to the pm hour unless it was noon
+            if(hour != 12){
+                hour +=12;
+            }
             printf("In 24 hour format, - you entered %d%d:%d%d\n", ((hour/10)), (hour%10), (min/10), (min%10));
         }
         printf("---------------------------\n");
@@ -91,22 +105,33 @@ Task 7: Display net cost
         scanf("%d", &hour);
         printf("Enter a value between 0 and 60 for minutes: ");
         scanf("%d", &min);
-        printf("\n---------------------------\n");
+        printf("---------------------------\n");
         printf("You entered %d%d:%d%d\n", (hour/10), (hour%10), (min/10), (min%10));
         //check if inputted hour was greater than 12 to determine meridian and convert to 12 hour
         if(hour >= 12){
             strcpy(meridian, "pm");
-            hour -= 12;
+            //subtract 12 from the hour only if it wasnt noon
+            if(hour > 12){
+                hour -= 12;
+            }
         }
         else{
             strcpy(meridian, "am");
+            //if hour was 0, set to 12 hor 12 hour format
+            if(hour == 0){
+                hour = 12;
+            }
         }
         printf("In 12 hour format, - you entered %d%d:%d%d %s\n", (hour/10), (hour%10), (min/10), (min%10), meridian);
         printf("---------------------------\n");
 
-        //if changed for pm, change back to 24 hour format
-        if(meridian[0] == 'p'){
+        //if changed for pm, change back to 24 hour format, unless it was set to noon
+        if(meridian[0] == 'p' && (hour != 12)){
             hour += 12;
+        }
+        //if 0 hour changed to 12, change back
+        else if(hour == 12 && meridian[0] == 'a'){
+            hour = 0;
         }
     }
     //task 2
@@ -146,15 +171,15 @@ Task 7: Display net cost
     }
 
     //task 3
-    printf("Would you like a hotel in Montreal - enter 0 for no; 1 for yes? ");
+    printf("\nWould you like a hotel in Montreal - enter 0 for no; 1 for yes? ");
     scanf("%d", &isHotel);
     //if they want a hotel, display hotel choices and get their choices
     if(isHotel==1){
-        printf("\n\nThere are 3 hotels:\n1. Marriott: $248\n2. Sheraton: $90\n3. Double Tree: $128\n\n");
-        printf("Your choice:");
+        printf("\nThere are 3 hotels:\n1. Marriott: $248 per night\n2. Sheraton: $90 per night\n3. Double Tree: $128 per night\n\n");
+        printf("Your choice?:");
         scanf("%d", &hotelChoice);
         //ask how many days the user wants to stay
-        printf("How many days in Montreal?\n");
+        printf("How many days in Montreal?");
         scanf("%d", &daysInHotel);
         //calculate hotel cost based on choice of hotel and days in montreal
         if(hotelChoice == 1){
@@ -171,7 +196,7 @@ Task 7: Display net cost
         }
         //task 4
         //ask if user wants a ride to hotel
-        printf("Would you like a ride from airport to hotel? - enter 0 for no; 1 for yes ");
+        printf("\nWould you like a ride from airport to hotel? - enter 0 for no; 1 for yes ");
         scanf("%d", &rideChoice);
         //if user wants a ride, calculate ride cost
         if(rideChoice == 1){
@@ -199,7 +224,7 @@ Task 7: Display net cost
 
     //task 5
     //display individual costs
-    printf("\nYour total cost comes to:\n\nCost of closest departure flight: $ %.2lf\nCost of Hotel for %d days: $ %.2lf\nCost of ride: $ %.2lf\n\n", flightCost, daysInHotel, hotelCost, rideCost);
+    printf("\nYour total cost comes to:\n\nCost of closest departure flight: $ %.2lf\nCost of Hotel for %d days: $ %.2lf\nCost of Ride: $ %.2lf\n\n", flightCost, daysInHotel, hotelCost, rideCost);
     totalCost = flightCost + hotelCost + rideCost;  //calculate total cost before discounts and taxes
     printf("Total cost before tax: $ %.2lf\n\n", totalCost);
 
@@ -233,6 +258,8 @@ Task 7: Display net cost
     //calculate and display net cost after taxes
     totalCost = totalCost * 1.13;
     printf("Finally, your total cost after taxes: $ %.2lf\n", totalCost);
+
+    }//end for loop
 
     return 0;
  }
