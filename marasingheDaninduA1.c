@@ -34,12 +34,13 @@ Task 3: Ask user if they want a hotel, and if so, give them the choices for a ho
 Task 4: Ask if user wants a ride to the hotel (if they're staying in one)
 Task 5: Calculate and display total cost before discounts and taxes
 Task 6: Calculate discounted price
+Task 7: Display net cost
 ************************/
 #include <stdio.h>  //used for printf and scanf
 #include <string.h>
  
  int main(){
-    int hour, min, format, isHotel, hotelChoice, daysInHotel, rideChoice, dayOfBirth;
+    int hour, min, format, isHotel, hotelChoice, daysInHotel, rideChoice, dayOfBirth, sumBirthDigits;
     char meridian[3];
     double flightCost, hotelCost, rideCost, totalCost;
 
@@ -49,6 +50,7 @@ Task 6: Calculate discounted price
     hotelCost = 0;
     rideCost = 0;
     totalCost = 0;
+    sumBirthDigits = 0;
 
     //task 1
     //prompt for format until valid entry
@@ -71,7 +73,7 @@ Task 6: Calculate discounted price
         else if(meridian[0] == 'p'){
             strcpy(meridian, "pm");
         }
-        printf("\n\n---------------------------\n");
+        printf("\n---------------------------\n");
         printf("You entered %d%d:%d%d %s\n", (hour/10), (hour%10), (min/10), (min%10), meridian);
         //adjust 24 hour time output based on meridian
         if(meridian[0] == 'a'){
@@ -89,7 +91,7 @@ Task 6: Calculate discounted price
         scanf("%d", &hour);
         printf("Enter a value between 0 and 60 for minutes: ");
         scanf("%d", &min);
-        printf("\n\n---------------------------\n");
+        printf("\n---------------------------\n");
         printf("You entered %d%d:%d%d\n", (hour/10), (hour%10), (min/10), (min%10));
         //check if inputted hour was greater than 12 to determine meridian and convert to 12 hour
         if(hour >= 12){
@@ -152,7 +154,7 @@ Task 6: Calculate discounted price
         printf("Your choice:");
         scanf("%d", &hotelChoice);
         //ask how many days the user wants to stay
-        printf("How many days in Montreal?");
+        printf("How many days in Montreal?\n");
         scanf("%d", &daysInHotel);
         //calculate hotel cost based on choice of hotel and days in montreal
         if(hotelChoice == 1){
@@ -193,21 +195,44 @@ Task 6: Calculate discounted price
 
     //prompt for user DOB for task 6 discount 2
     printf("\nNow enter your day of birth to qualify for discount2: ");
-    scanf("%d", dayOfBirth);
+    scanf("%d", &dayOfBirth);
 
     //task 5
     //display individual costs
     printf("\nYour total cost comes to:\n\nCost of closest departure flight: $ %.2lf\nCost of Hotel for %d days: $ %.2lf\nCost of ride: $ %.2lf\n\n", flightCost, daysInHotel, hotelCost, rideCost);
     totalCost = flightCost + hotelCost + rideCost;  //calculate total cost before discounts and taxes
-    printf("Total cost before tax: $ %.2lf", totalCost);
+    printf("Total cost before tax: $ %.2lf\n\n", totalCost);
 
     //task 6
-    //if total cost was a multiple of 11
+    //if subtotal cost was a multiple of 11
     if((int)totalCost % 11 == 0){
         //knock 5% off and notify user of the discount
         totalCost *= 0.95;
-        printf("You get a 5%% discount because the total cost was a multiple of 11 :)");
+        printf("You get a 5%% discount because the total cost was a multiple of 11 :)\n");
     }
+    else{
+        //notify if user didnt qualify for the discount1
+        printf("Sorry - you missed out on 5%% discount because the total cost was not a multiple of 11\n");
+    }
+    //calculate sum of day of birth digits
+    sumBirthDigits = (dayOfBirth/10) + (dayOfBirth%10);
+    //if subtotal cost after discount 1 is a multiple of the sum of the digits of the user's day of birth
+    if((int)totalCost % sumBirthDigits == 0){
+        //knock 5% off and notify user of the discount
+        totalCost *= 0.95;
+        printf("You get an additional 5%% discount because the total cost after discount1 was a multiple of the sum of digits in your day of birth :)\n");
+    }
+    else{
+        //notify if user didnt qualify for the discount1
+        printf("Sorry - you missed out on the additional 5%% discount because the total cost after discount1 was not a multiple of the sum of digits in your day of birth\n");
+    }
+    //display subtotal after discounts but before taxes
+    printf("\nTotal cost after discounts 1 and 2: $ %.2lf\n\n", totalCost);
+
+    //task 7
+    //calculate and display net cost after taxes
+    totalCost = totalCost * 1.13;
+    printf("Finally, your total cost after taxes: $ %.2lf\n", totalCost);
 
     return 0;
  }
