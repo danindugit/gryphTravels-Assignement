@@ -108,37 +108,37 @@ Task 6: Calculate discounted price
         }
     }
     //task 2
-    //if given time is before 7:15am or after 5:15pm
-    if ((hour < 7) || (hour == 7 && min <= 15) || (hour > 17) || (hour == 17 && min > 15)) {
+    //if given time is from 0:00 to 6:59 or if it is from 07:00 to 07:44
+    if ((hour >= 0 && hour < 7) || (hour == 7 && min <= 44)) {
         //closest departure time is 7:15am
         printf("Closest departure times is 7:15 a.m., arriving at 8:25 a.m.\n");
         flightCost = 231;
     }
-    else if((hour < 8) || (hour == 8 && min <= 15)){
+    else if((hour < 8) || (hour == 8 && min <= 44)){
         printf("Closest departure times is 8:15 a.m., arriving at 9:25 a.m.\n");
         flightCost = 226;
     }
-    else if((hour < 9) || (hour == 9 && min <= 15)){
+    else if((hour < 9) || (hour == 9 && min <= 44)){
         printf("Closest departure times is 9:15 a.m., arriving at 10:25 a.m.\n");
         flightCost = 226;
     }
-    else if((hour < 10) || (hour == 10 && min <= 15)){
+    else if((hour < 10) || (hour == 10 && min <= 44)){
         printf("Closest departure times is 10:15 a.m., arriving at 11:25 a.m.\n");
         flightCost = 283;
     }
-    else if((hour < 11) || (hour == 11 && min <= 15)){
+    else if((hour < 13) || (hour == 13 && min <= 14)){
         printf("Closest departure times is 11:15 a.m., arriving at 12:25 p.m.\n");
         flightCost = 283;
     }
-    else if((hour < 15) || (hour == 15 && min <= 15)){
+    else if((hour < 15) || (hour == 15 && min <= 44)){
         printf("Closest departure times is 3:15 p.m., arriving at 4:25 p.m.\n");
         flightCost = 226;
     }
-    else if((hour < 16) || (hour == 16 && min <= 15)){
+    else if((hour < 16) || (hour == 16 && min <= 44)){
         printf("Closest departure times is 4:15 p.m., arriving at 5:25 p.m.\n");
         flightCost = 226;
     }
-    else if((hour < 17) || (hour == 17 && min <= 15)){
+    else if((hour < 23) || (hour == 23 && min <= 59)){
         printf("Closest departure times is 5:15 p.m., arriving at 6:25 p.m.\n");
         flightCost = 401;
     }
