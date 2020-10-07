@@ -33,6 +33,7 @@ Task 2: Based on the time entered by the customer, the closest departure time is
 Task 3: Ask user if they want a hotel, and if so, give them the choices for a hotel and ask how long the stay is.
 Task 4: Ask if user wants a ride to the hotel (if they're staying in one)
 Task 5: Calculate and display total cost before discounts and taxes
+Task 6: Calculate discounted price
 ************************/
 #include <stdio.h>  //used for printf and scanf
 #include <string.h>
@@ -199,6 +200,14 @@ Task 5: Calculate and display total cost before discounts and taxes
     printf("\nYour total cost comes to:\n\nCost of closest departure flight: $ %.2lf\nCost of Hotel for %d days: $ %.2lf\nCost of ride: $ %.2lf\n\n", flightCost, daysInHotel, hotelCost, rideCost);
     totalCost = flightCost + hotelCost + rideCost;  //calculate total cost before discounts and taxes
     printf("Total cost before tax: $ %.2lf", totalCost);
+
+    //task 6
+    //if total cost was a multiple of 11
+    if((int)totalCost % 11 == 0){
+        //knock 5% off and notify user of the discount
+        totalCost *= 0.95;
+        printf("You get a 5%% discount because the total cost was a multiple of 11 :)");
+    }
 
     return 0;
  }
